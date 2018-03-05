@@ -505,6 +505,32 @@ public class ChecklistMain {
 			ws1.getRow(9).createCell(4).setCellValue(ws2.getSheetName() + "/J2");
 			ws1.getRow(9).getCell(4).setCellStyle(cellStyle1);
 		}
+		
+		/*
+		 * Create by NhanVH
+		 * Description: Handle 10,11,12,13,14
+		 */
+		XSSFSheet ws3 = wb.getSheetAt(3);
+		int NumOfColumns = ws3.getLastRowNum();
+		int count = 0;
+		for(int i = 0; i < NumOfColumns; i++) {
+			XSSFCell CheckCell = ws3.getRow(i).getCell(1);
+			if(CheckCell != null) {
+				String str1 = cc.cellToString(CheckCell);
+				if(str1 != "") {
+					count++;
+				}
+			}
+		}
+		int sum = 0;
+		for(int j = 2; j < count+1; j++) {
+			XSSFCell CheckData = ws3.getRow(j).getCell(1);
+			String str2 = cc.cellToString(CheckData);
+			sum = sum + (int)Float.parseFloat(str2);
+		}
+		
+		System.out.println(sum);
+		
 		/*
 		 * Created By: NhanVH
 		 * Description: Execute record data on file and close file.
