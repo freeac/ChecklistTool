@@ -508,9 +508,10 @@ public class ChecklistMain {
 		
 		/*
 		 * Create by NhanVH
-		 * Description: Handle 10,11,12,13,14
+		 * Description: Handle checklist 10,11
 		 */
 		XSSFSheet ws3 = wb.getSheetAt(3);
+		ArrayList<String> arr4 = new ArrayList<String>();
 		int NumOfColumns = ws3.getLastRowNum();
 		int count = 0;
 		for(int i = 0; i < NumOfColumns; i++) {
@@ -522,14 +523,154 @@ public class ChecklistMain {
 				}
 			}
 		}
-		int sum = 0;
-		for(int j = 2; j < count+1; j++) {
-			XSSFCell CheckData = ws3.getRow(j).getCell(1);
-			String str2 = cc.cellToString(CheckData);
-			sum = sum + (int)Float.parseFloat(str2);
+		
+		int count1 = 0;
+		for(int i = 0; i < NumOfColumns; i++) {
+			XSSFCell CheckCell = ws3.getRow(i).getCell(2);
+			if(CheckCell != null) {
+				String str1 = cc.cellToString(CheckCell);
+				if(str1 != "") {
+					count1++;
+				}
+			}
 		}
 		
-		System.out.println(sum);
+		int count2 = 0;
+		for(int i = 0; i < NumOfColumns; i++) {
+			XSSFCell CheckCell = ws3.getRow(i).getCell(6);
+			if(CheckCell != null) {
+				String str1 = cc.cellToString(CheckCell);
+				if(str1 != "") {
+					count2++;
+				}
+			}
+		}
+		
+		int count3 = 0;
+		for(int i = 0; i < NumOfColumns; i++) {
+			XSSFCell CheckCell = ws3.getRow(i).getCell(7);
+			if(CheckCell != null) {
+				String str1 = cc.cellToString(CheckCell);
+				if(str1 != "") {
+					count3++;
+				}
+			}
+		}
+		
+		int count4 = 0;
+		for(int i = 0; i < NumOfColumns; i++) {
+			XSSFCell CheckCell = ws3.getRow(i).getCell(8);
+			if(CheckCell != null) {
+				String str1 = cc.cellToString(CheckCell);
+				if(str1 != "") {
+					count4++;
+				}
+			}
+		}
+		
+		int count5 = 0;
+		for(int i = 0; i < NumOfColumns; i++) {
+			XSSFCell CheckCell = ws3.getRow(i).getCell(9);
+			if(CheckCell != null) {
+				String str1 = cc.cellToString(CheckCell);
+				if(str1 != "") {
+					count5++;
+				}
+			}
+		}
+		
+		int count6 = 0;
+		for(int i = 0; i < NumOfColumns; i++) {
+			XSSFCell CheckCell = ws3.getRow(i).getCell(10);
+			if(CheckCell != null) {
+				String str1 = cc.cellToString(CheckCell);
+				if(str1 != "") {
+					count6++;
+				}
+			}
+		}
+		
+		int count7 = 0;
+		for(int i = 0; i < NumOfColumns; i++) {
+			XSSFCell CheckCell = ws3.getRow(i).getCell(11);
+			if(CheckCell != null) {
+				String str1 = cc.cellToString(CheckCell);
+				if(str1 != "") {
+					count7++;
+				}
+			}
+		}
+		
+		if (count == count1 && count == count2 && count == count3 && count == count4 && count == count5
+				&& count == count6 && count == count7) {
+			for(int j = 2; j <= count; j++) {
+				XSSFCell CheckData = ws3.getRow(j).getCell(1);
+				String str2 = cc.cellToString(CheckData);
+				if(j-1 != (int)Float.parseFloat(str2)) {
+					arr4.add("/B" + (j+1));
+				}
+			}
+			
+			for(int j = 2; j <= count; j++) {
+				XSSFCell CheckData = ws3.getRow(j).getCell(10);
+				String str3 = cc.cellToString(CheckData);
+				if(j-1 != (int)Float.parseFloat(str3)) {
+					arr4.add("/K" + (j+1));
+				}
+			}
+			
+			if(arr4.size() > 0) {
+				arr4.add(0, ws3.getSheetName());
+			}
+			
+			String result4 = "";
+			for(int i = 0; i < arr4.size(); i++) {
+				result4 = result4 + arr4.get(i);
+			}
+			
+			if(arr4.size() > 0) {
+				ws1.getRow(10).createCell(4).setCellValue(result4);
+				ws1.getRow(10).getCell(4).setCellStyle(cellStyle1);
+			}
+		}else {
+			ws1.getRow(11).createCell(4).setCellValue(ws3.getSheetName() + "/Column B,C,G,H,I,J,K or L data is null");
+			ws1.getRow(11).getCell(4).setCellStyle(cellStyle1);
+		}
+		
+		/*
+		 * Created By: NhanVH
+		 * Description: Handle checklist 12
+		 * 
+		 */
+		String strx = "PJコード_設問番号_導入画像.jpg";
+		ArrayList<String> arr5 = new ArrayList<String>();
+		for(int i = 0; i < NumOfColumns; i++) {
+			XSSFCell CheckCell = ws3.getRow(i).getCell(5);
+			if(CheckCell != null) {
+				String str1 = cc.cellToString(CheckCell);
+				if(str1 != "") {
+					if(!str1.toLowerCase().contains(strx.toLowerCase())) {
+						arr5.add("/F"+ (i+1));
+
+					}
+				}
+			}
+		}
+		
+		if(arr5.size() > 0) {
+			arr5.add(0, ws3.getSheetName());
+		}
+		
+		String result5 = "";
+		for(int i = 0; i < arr5.size(); i++) {
+			result5 = result5 + arr5.get(i);
+		}
+		
+		if(arr5.size() > 0) {
+			ws1.getRow(11).createCell(4).setCellValue(result5);
+			ws1.getRow(11).getCell(4).setCellStyle(cellStyle1);
+		}
+		
 		
 		/*
 		 * Created By: NhanVH
